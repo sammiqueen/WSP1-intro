@@ -1,5 +1,7 @@
 import express, { request, response } from "express" //ESM
 import nunjucks from "nunjucks" 
+import morgan from "morgan"
+import indexRouter from "./routes/index.js"
 
 const app = express()
 
@@ -9,45 +11,13 @@ nunjucks.configure("views", {
 })
 
 app.use(express.static("public"))
+app.use(morgan("dev"))
 
-app.get("/om", (request, response) => {
-    response.render("om.njk", {
-        message: "Om Mig :3",
-    })
-})
+app.use(`/`, indexRouter)
 
-app.get("/",(request, response) => {
-    const name = request.query.name
-    console.log(request.query)
-    response.render("index.njk", {
-        title: "Hello World",
-        message: `name = ${name}`
-    })
-})
-
-app.get(`/watch`, (request, response) => {
-    const movieID = request.query.v
-    console.log(movieID)
-
-    const movies = {
-        "test": {
-            title: "shrek 2",
-            year: 1994
-        }
-    }
-
-    response.render(`watch.njk`, {
-        title: `Watch`,
-        movie: movies[movieID]
-    })
-})
-
-app.get(`/ytub`, (request, response) =>{
-    const ID = request.query.v
-    
-    response.render(`ytub.njk`,{
-        title: `Youtube`,
-        ID: ID,
+app.use((request, response) => {
+    response.status(404).render(`404.njk`, {
+        title: `404 - Not Found`,
     })
 })
 
