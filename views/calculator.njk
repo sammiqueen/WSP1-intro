@@ -1,0 +1,32 @@
+{% extends "layout.njk" %}
+{% block content %}
+
+<main class="container">
+    <h1>{{ title }}</h1>
+    <form action="/calculator" method="get">
+
+        <input type="number" 
+            name="n1"
+            placeholder="Enter number..."
+            value="{{ query }}">
+        <input type="number" 
+            name="n2"
+            placeholder="Enter number..."
+            value="{{ query }}">
+
+        <select name="symbol">
+            <option value="add">Addition</option>
+            <option value="sub">Subtraktion</option>
+            <option value="mul">Multiplikation</option>
+            <option value="div">Division</option>
+        </select>
+
+        <button type="submit"> Beräkna! </button>
+
+        {% if answer %}
+        <p>Svaret på din kalkylering är {{ answer }}</p>
+        {% endif %}
+
+</main>
+
+{% endblock %}

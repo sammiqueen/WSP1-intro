@@ -1,0 +1,22 @@
+{% extends "layout.njk" %}
+{% block content %}
+
+<main class="container">
+    <h1>{{ title }}</h1>
+    <form action="/search" method="get">
+        <input type="text" 
+            name="q"
+            placeholder="Search..."
+            value="{{ query }}">
+        <button type="submit"> Search </button>
+
+    <p>Du sökte efter "{{query}}" vilket hade resulterat i <a href="https://www.google.com/search?client=firefox-b-d&q={{query}}">följande</a> resultat om du sökte på google.com</p>
+    
+    {% if names == "" %}
+    <p>Vi hittade inget resultat för din sökning :( försök igen?</p>
+    {% else %}
+    <p>Vi hittade {{names}}.</p>
+    {% endif %}
+</main>
+
+{% endblock %}

@@ -17,7 +17,7 @@ router.get("/",(request, response) => {
     })
 })
 
-router.get(`/watch`, (request, response) => {
+router.get("/watch", (request, response) => {
     const movieID = request.query.v
     console.log(movieID)
 
@@ -28,7 +28,7 @@ router.get(`/watch`, (request, response) => {
         }
     }
 
-    response.render(`watch.njk`, {
+    response.render("watch.njk", {
         title: `Watch`,
         movie: movies[movieID]
     })
@@ -37,7 +37,7 @@ router.get(`/watch`, (request, response) => {
 router.get(`/ytub`, (request, response) =>{
     const ID = request.query.v
     
-    response.render(`ytub.njk`,{
+    response.render("ytub.njk",{
         title: `Youtube`,
         ID: ID,
     })
